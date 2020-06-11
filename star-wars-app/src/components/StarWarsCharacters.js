@@ -5,7 +5,7 @@ import { getData } from "../api";
 import "./star-wars-characters.css";
 
 export default function StarWarsCharacters() {
-  const [url, setUrl] = useState("https://swapi.co/api/people");
+  const [url, setUrl] = useState("https://swapi.co/api/people/?page=2"); // https://swapi.co/api/people
   const [previous, setPrevious] = useState();
   const [next, setNext] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +13,7 @@ export default function StarWarsCharacters() {
   useEffect(() => {
     setIsLoading(true);
     const getCharacters = async () => {
-      const characters = await getData(url);
+      const characters = await getData(url); // characters = res.data
       console.log(characters);
       setNext(characters.next);
       setPrevious(characters.previous);
@@ -36,7 +36,7 @@ export default function StarWarsCharacters() {
   return (
     <div>
       {isLoading ? (
-        <Loader
+        <Loader data-testid="Loader"
           type="ThreeDots"
           color="#FFC402"
           height={30}
